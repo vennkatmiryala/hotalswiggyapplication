@@ -1,0 +1,19 @@
+{% extends 's_admin/base.html' %}
+{% load static %}
+{% block common %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"><br><br>
+    <form action="{% url 'admin_check' %}" method="post">
+    {% csrf_token %}
+    <div class="countainer">
+    <h1 style="text-align: center;color: blue">Sign in</h1>
+        <div>
+            <input type="text" required placeholder="username" name="a_username">
+            <input type="password" required placeholder="Password" name="a_password"><br>
+            <button type="submit"> Singin</button>
+        </div>
+    </div>
+    </form>
+    {% for x in messages %}
+        <h1 style="text-align: center;color: red">{{ x }}</h1>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,10 @@
+input[type=email],input[type=number]{
+    background: none;
+    border: none;
+    outline: none;
+
+    border-bottom: 2px solid blue;
+    color: blue;
+    text-align: center;
+    margin: 10px;
+}

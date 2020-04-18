@@ -1,0 +1,14 @@
+{% extends 's_admin/base.html' %}
+
+{% block common %}
+    {% load static %}
+    {% if request.session.status %}
+    {% include 's_admin/menu.html' %}
+        <link rel="stylesheet" href="{% static 'style.css' %}"><br>
+    <img class="img" src="{% static 'images/re2.jpeg' %}">
+        {% else %}
+        <h3>
+        please do login
+        </h3>
+    {% endif %}
+{% endblock %}

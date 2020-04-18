@@ -1,0 +1,16 @@
+{% extends 'res/base.html' %}
+{% block common %}
+    {% load static %}
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'style1.css' %}">
+
+    <form action="{% url 'savedetails' %}" method="post">
+    {% csrf_token %}
+    <table border="0" align="center" width="600" style="text-align: center;;height: 50px;background-color: whitesmoke">
+     <tr style="background-color:goldenrod;color:black;height: 40px"><th width="300"><a href="#">LOGIN</a></th><th width="300"><a href="{% url 'registation' %}">REGISTRATION</a></th></tr>
+    {{ rf }}
+    <tr><th></th><th><button style="width: 100px" type="submit">save</button></th></tr>
+    </table>
+    </form>
+    <h5 align="center"><a href="{% url 'back' %}"><button style="width: 100px;text-align: center;" type="submit">BACK</button></a></h5>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 's_admin/base.html' %}
+{% load static %}
+{% block common %}
+    {% include 's_admin/menu.html' %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"><br>
+    {% if request.session.status %}
+    {% if dt %}
+        <form action="{% url 'updatesave' %}?pno = {{ dt.cno }}" method="post">
+        {% csrf_token %}
+        <table class="countainer">
+            <tr><th>city num:</th><th><h4 style="text-align: center">{{ dt.cno }}</h4></th></tr>
+        <tr><th>city name:</th><th><input type="text" name="cityname" value="{{ dt.cname }}" ></th></tr>
+        <tr><th>city name:</th><th><input type="text" name="statename" value="{{ dt.state }}"></th></tr>
+        <tr><th></th><th><button  style="width: 100px" type="submit">update</button></th></tr>
+        </table>
+        </form>
+    {% else %}
+    <form action="{% url 'savecity' %}" method="post">
+    {% csrf_token %}
+    <table class="countainer">
+        <tr><th colspan="2"><h4 style="text-align: center;font-family: 'Arial Black'">City Operation</h4></th></tr>
+    <tr><th style="margin-right: 10px">{{ cf }}</th></tr>
+    <tr><th></th><th><button style="width: 100px" type="submit"> save</button></th></tr>
+    </table>
+    </form>
+    {% endif %}
+    {% if data %}<br>
+    <table align="center" border="2"  width="600" style="text-align: center">
+    <tr bgcolor="yellow">
+        <th>city num</th>
+        <th>city name</th>
+        <th>state name</th>
+        <th>update</th>
+        <th>delete</th>
+    </tr>
+    {% for x in data %}
+        <tr bgcolor="#fffafa">
+        <th>{{ x.cno }}</th>
+        <th>{{ x.cname }}</th>
+        <th>{{ x.state }}</th>
+            <th><a href="{% url 'updatecity' %}?pno={{ x.cno }}"><img src="{% static 'images/upd.png' %}" width="25" height="25"></a></th>
+            <th><a href="{% url 'deletecity' %}?pno={{ x.cno }}"><img src="{% static 'images/delet.jpg' %}" width="25" height="25"></a></th>
+    </tr>
+    {% endfor %}
+    </table>
+        {% else %}<br>
+        <h1 style="text-align: center;color: red">please insert the data</h1>
+    {% endif %}
+        {% else %}
+
+        <h3 style="text-align: center;font-family: 'Agency FB';font-size: 25px;color: red">
+            Please Do Login
+        </h3>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'res/base.html' %}
+{% block common %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <br>
+    <table border="0" align="center" width="600" style="text-align: center;;height: 50px">
+        <tr style="background-color:goldenrod;color:black;height: 40px"><th width="300"><a href="#">LOGIN</a></th><th width="300"><a href="{% url 'registation' %}">REGISTRATION</a></th></tr>
+    <tr><th colspan="2"><img src="{% static 'images/png.png' %}" width="600" height="500"></th></tr>
+
+    </table>
+{% endblock %}

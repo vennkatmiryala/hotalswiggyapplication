@@ -1,0 +1,63 @@
+{% extends 's_admin/base.html' %}
+
+{% block common %}
+
+    {% load static %}
+
+
+
+            {% include 's_admin/menu.html' %}
+          <link rel="stylesheet" href="{% static 'style.css' %}"><br>
+ {% if request.session.status %}
+
+
+
+        <table align="center" border="0" width="800" style="text-align: center">
+            <tr>
+            <th colspan="8" style="text-align: center;font-family: 'Arial Black';font-size: 30px;color: blue;background-color: whitesmoke">
+                Approved Restaurant Information
+            </th>
+        </tr>
+
+        <tr bgcolor="aqua">
+            <th>No</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Area</th>
+            <th>Type</th>
+
+        </tr>
+
+        {% for x in data %}
+            <tr>
+            <td>{{ x.restro_id }}</td>
+            <td>{{ x.restro_name }}</td>
+            <td>{{ x.restro_contact }}</td>
+            <td>{{ x.restro_email }}</td>
+            <td>
+                {{ x.restro_area }}, <br>
+                {{ x.restro_area.city.city_name }},<br>
+                {{ x.restro_area.city.state.state_name }}.
+            </td>
+            <td>{{ x.restro_type }}</td>
+
+        </tr>
+        {% endfor %}
+
+
+        </table>
+
+
+
+        {% else %}
+
+        <h3 style="text-align: center;font-family: 'Agency FB';font-size: 25px;color: red">
+            Please Do Login
+        </h3>
+
+    {% endif %}
+
+
+{% endblock %}
+

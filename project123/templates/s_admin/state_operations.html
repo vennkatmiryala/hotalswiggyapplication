@@ -1,0 +1,52 @@
+{% extends 's_admin/base.html' %}
+{% load static %}
+{% block common %}
+    {% include 's_admin/menu.html' %}
+
+    <link rel="stylesheet" href="{% static 'style.css' %}"><br>
+    {% if request.session.status %}
+    {% if sf %}
+    <form action="{% url 'save_state' %}" method="post">
+    {% csrf_token %}
+   <table align="center"  class="countainer">
+   <tr><th colspan="2" style="text-align: center;font-size: 30px;font-family: sans-serif;">state operations</th></tr>
+       <h3>{{ sf }}</h3>
+   <tr><th></th><th><button style="width: 70px;margin: 20px" type="submit">save</button></th></tr>
+   </table><br>
+        {% else %}
+        <form action="{% url 'updatestated' %}?pno={{ data.sno }}" method="post">
+        {% csrf_token %}<br>
+        <table align="center" style="background-color: bisque;border-radius: 20px">
+            <tr><th><font style="margin: 20px">state num:</font></th><th><h4 align="center">{{ data.sno }}</h4></th></tr>
+            <tr><th><font style="margin: 20px">state name:</font></th><th><input type="text"required value="{{ data.sname }}" name="state"></th></tr>
+        <tr><th></th><th><button style="width: 100px" type="submit">update</button></th></tr>
+        </table>
+        </form>
+    {% endif %}<br>
+    {% if da %}
+        <table align="center" width="600" style="text-align: center" bgcolor="#e6e6fa" border="2">
+        <tr bgcolor="yellow">
+            <th>satanumber</th>
+            <th>state name</th>
+            <th>update</th>
+            <th>delete</th>
+        </tr>
+        {% for x in da %}
+             <tr>
+            <th>{{ x.sno }}</th>
+            <th>{{ x.sname }}</th>
+                 <th><a href="{% url 'updatestate' %}?pno={{ x.sno }}"><img src="{% static 'images/upd.png' %}" width="25" height="25"></a></th>
+                 <th><a href="{% url 'deletestate' %}?pno={{ x.sno }}"><img src="{% static 'images/delet.jpg' %}" width="25" height="25"></a></th>
+        </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+
+   </form>
+        {% else %}
+
+        <h3 style="text-align: center;font-family: 'Agency FB';font-size: 25px;color: red">
+            Please Do Login
+        </h3>
+    {% endif %}
+{% endblock %}

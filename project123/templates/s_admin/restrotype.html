@@ -1,0 +1,39 @@
+{% extends 's_admin/base.html' %}
+{% block common %}
+    {% load static %}
+    {% include 's_admin/menu.html' %}
+     <link rel="stylesheet" href="{% static 'style.css' %}"><br>
+{% if request.session.status %}
+    <form action="{% url 'typesave' %}" method="post">
+    {% csrf_token %}
+<table class="countainer">
+    <tr><th colspan="2"><h4 style="text-align: center;font-family: 'Arial Black'">Restarent Form</h4></th></tr>
+{{ rf }}
+<tr><th></th><th><button style="width: 100px" type="submit">save</button></th></tr>
+</table>
+    </form><br>
+    {% if data %}
+        <table border="2" align="center" style="text-align: center;width: 600px">
+        <tr bgcolor="yellow">
+            <th>restro num</th>
+            <th>restro type</th>
+            <th>update</th>
+            <th>delete</th>
+        </tr>
+        {% for x in data %}
+             <tr bgcolor="#f5f5f5">
+            <th>{{ x.resno }}</th>
+            <th>{{ x.restype }}</th>
+            <th><img src="{% static 'images/upd.png' %}" width="25" height="25"></th>
+            <th><img src="{% static 'images/delet.jpg' %}" width="25" height="25"></th>
+        </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+    {% else %}
+
+        <h3 style="text-align: center;font-family: 'Agency FB';font-size: 25px;color: red">
+            Please Do Login
+        </h3>
+    {% endif %}
+{% endblock %}
